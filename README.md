@@ -9,10 +9,10 @@ In order to run the application clone the repo to your local repository and do t
 - Run bankTest.html in your favourite browser.
 - In the console do the following to access your account-
 
-**accountName = new Account()** (To set up an account)
-**accountName.credit(amount)** (To credit your account)
-**accountName.debit(amount)** (To debit from your account)
-**accountName.print()** (To see all your transactions)
+- **accountName = new Account()** (To set up an account)
+- **accountName.credit(amount)** (To credit your account)
+- **accountName.debit(amount)** (To debit from your account)
+- **accountName.print()** (To see all your transactions)
 
 #### HOW TO TEST
 
