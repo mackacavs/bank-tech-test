@@ -3,11 +3,11 @@ class Statement {
     this.currentStatement = '';
   }
 
-  addLineToStatement(amount, balance, currentDate, type) {
+  addLineToStatement(amount, balance, type) {
     if (this.isCredit(type)) {
-      this.currentStatement = `\n${currentDate} || ${amount}.00 || || ${balance}.00` + this.currentStatement
+      this.currentStatement = `\n${new Date().toLocaleDateString()} || ${amount}.00 || || ${balance}.00` + this.currentStatement
     } else {
-      this.currentStatement = `\n${currentDate} || || ${amount}.00 || ${balance}.00` + this.currentStatement
+      this.currentStatement = `\n${new Date().toLocaleDateString()} || || ${amount}.00 || ${balance}.00` + this.currentStatement
     }
   }
 
@@ -18,7 +18,6 @@ class Statement {
   print() {
     console.log(`date || credit || debit || balance` + this.currentStatement)
     return (`date || credit || debit || balance` + this.currentStatement)
-
   }
 
 }

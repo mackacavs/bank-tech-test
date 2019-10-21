@@ -21,7 +21,7 @@ describe("Account", function () {
     it("expects the call the function 'addToStatement'", function () {
       spyOn(account, 'addToStatement')
       account.credit(100)
-      expect(account.addToStatement).toHaveBeenCalledWith(100, 100, new Date().toLocaleDateString(), 'credit');
+      expect(account.addToStatement).toHaveBeenCalledWith(100, 100, 'credit');
     })
 
   })
@@ -40,7 +40,7 @@ describe("Account", function () {
     it("expects the call the function 'addToStatement'", function () {
       spyOn(account, 'addToStatement')
       account.debit(50)
-      expect(account.addToStatement).toHaveBeenCalledWith(50, 50, new Date().toLocaleDateString(), 'debit');
+      expect(account.addToStatement).toHaveBeenCalledWith(50, 50, 'debit');
     })
 
     it("expects throw an error if the balance will be reduced to lower than 0 due to the amount debited", function () {
@@ -52,8 +52,8 @@ describe("Account", function () {
     it("expects the function to call the addLineToStatement function from the statement class", function () {
       statement = new Statement();
       spyOn(account.statement, 'addLineToStatement');
-      account.addToStatement(100, 100, new Date().toLocaleDateString(), 'credit')
-      expect(account.statement.addLineToStatement).toHaveBeenCalledWith(100, 100, new Date().toLocaleDateString(), 'credit');
+      account.addToStatement(100, 100, 'credit')
+      expect(account.statement.addLineToStatement).toHaveBeenCalledWith(100, 100, 'credit');
     })
   })
 
