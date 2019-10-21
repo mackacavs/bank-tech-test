@@ -6,7 +6,7 @@ In order to run the application clone the repo to your local repository and do t
 
 #### HOW TO USE IN THE BROWSER
 
-Run bankTest.html in your favourite browser and in the console do the following to access your account-
+Run bankTest.html in your favourite browser and in the console do the following to access and edit your account-
 
 - **accountName = new Account()** (To set up an account)
 - **accountName.credit(amount)** (To credit your account)
