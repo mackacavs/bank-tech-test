@@ -6,7 +6,7 @@ class Account {
 
   credit(amount) {
     this.balance += amount
-    this.addToStatement(amount, 'credit', new Date().toLocaleDateString())
+    this.addToStatement(amount, this.balance, new Date().toLocaleDateString(), 'credit')
   }
 
   debit(amount) {
@@ -14,11 +14,11 @@ class Account {
       throw "You have run out of money - please credit your account"
     }
     this.balance -= amount
-    this.addToStatement(amount, 'debit', new Date().toLocaleDateString())
+    this.addToStatement(amount, this.balance, new Date().toLocaleDateString(), 'debit')
   }
 
-  addToStatement(amount, date) {
-    this.statement.addLineToStatement(amount, date);
+  addToStatement(amount, balance, currentDate, type) {
+    this.statement.addLineToStatement(amount, balance, currentDate, type);
   }
 
   print() {
