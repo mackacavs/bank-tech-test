@@ -18,5 +18,4 @@ Run bankTest.html in your favourite browser and in the console do the following 
 - Run specrunner.html in your favourite browser
 - View the results of the test
 
-
-
+**Please note I've added both a console.log and return in the print method so that you see your final statement and it fufills all the tests**
