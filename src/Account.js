@@ -4,17 +4,25 @@ class Account {
     this.statement = new Statement();
   }
 
-  credit() {
-    console.log("Hello")
+  credit(amount) {
+    this.balance += amount
+    this.addToStatement(amount, 'credit', new Date().toLocaleDateString())
   }
 
-  debit() {
-
+  debit(amount) {
+    if (this.balance - amount < 0) {
+      throw "You have run out of money - please credit your account"
+    }
+    this.balance -= amount
+    this.addToStatement(amount, 'debit', new Date().toLocaleDateString())
   }
 
-  addToStatement() {
-    this.statement.create();
+  addToStatement(amount, date) {
+    this.statement.addLineToStatement(amount, date);
+  }
+
+  print() {
+    this.statement.print()
   }
 
 }
-

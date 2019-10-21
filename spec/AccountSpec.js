@@ -1,54 +1,72 @@
 describe("Account", function () {
-  var account;
 
   beforeEach(function () {
     account = new Account();
   });
 
-  it("should be able to test something correctly", function () {
-    expect(account.test()).toEqual('test')
+  it("should initialize with a balance of 0", function () {
+    expect(account.balance).toEqual(0)
   });
 
+  it("should initialize with a new instance of the statement class", function () {
+    expect(account.statement).toEqual(new Statement())
+  });
+
+  describe("#credit", function () {
+    it("expects the balance to increase by the argument provided entered every time it is called", function () {
+      account.credit(100)
+      expect(account.balance).toEqual(100)
+    })
+
+    it("expects the call the function 'addToStatement'", function () {
+      spyOn(account, 'addToStatement')
+      account.credit(100)
+      expect(account.addToStatement).toHaveBeenCalledWith(100, 'credit', new Date().toLocaleDateString());
+    })
+
+  })
+
+  describe("#debit", function () {
+
+    beforeEach(function () {
+      account.credit(100)
+    });
+
+    it("expects the balance to decrease by the argument provided entered every time it is called", function () {
+      account.debit(50)
+      expect(account.balance).toEqual(50)
+    })
+
+    it("expects the call the function 'addToStatement'", function () {
+      spyOn(account, 'addToStatement')
+      account.debit(50)
+      expect(account.addToStatement).toHaveBeenCalledWith(50, 'debit', new Date().toLocaleDateString());
+    })
+
+    it("expects throw an error if the balance will be reduced to lower than 0 due to the amount debited", function () {
+      expect(function () { account.debit(150) }).toThrow("You have run out of money - please credit your account")
+    })
+
+
+  })
+
+  describe("#addToStatement", function () {
+    it("expects the function to call the addLineToStatement function from the statement class", function () {
+      statement = new Statement();
+      spyOn(account.statement, 'addLineToStatement');
+      account.addToStatement(100, new Date().toLocaleDateString())
+      expect(account.statement.addLineToStatement).toHaveBeenCalledWith(100, new Date().toLocaleDateString());
+    })
+  })
+
+  describe("#print", function () {
+    it("expects the function to call the print function from the statement class", function () {
+      statement = new Statement();
+      spyOn(account.statement, 'print');
+      account.print()
+      expect(account.statement.print).toHaveBeenCalled();
+    })
+  })
+
+
 });
-
-//   describe("when song has been paused", function() {
-//     beforeEach(function() {
-//       player.play(song);
-//       player.pause();
-//     });
-
-//     it("should indicate that the song is currently paused", function() {
-//       expect(player.isPlaying).toBeFalsy();
-
-//       // demonstrates use of 'not' with a custom matcher
-//       expect(player).not.toBePlaying(song);
-//     });
-
-//     it("should be possible to resume", function() {
-//       player.resume();
-//       expect(player.isPlaying).toBeTruthy();
-//       expect(player.currentlyPlayingSong).toEqual(song);
-//     });
-//   });
-
-//   // demonstrates use of spies to intercept and test method calls
-//   it("tells the current song if the user has made it a favorite", function() {
-//     spyOn(song, 'persistFavoriteStatus');
-
-//     player.play(song);
-//     player.makeFavorite();
-
-//     expect(song.persistFavoriteStatus).toHaveBeenCalledWith(true);
-//   });
-
-//   //demonstrates use of expected exceptions
-//   describe("#resume", function() {
-//     it("should throw an exception if song is already playing", function() {
-//       player.play(song);
-
-//       expect(function() {
-//         player.resume();
-//       }).toThrowError("song is already playing");
-//     });
-//   });
-// });
